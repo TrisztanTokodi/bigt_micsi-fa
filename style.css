@@ -1,110 +1,127 @@
-/* Alapbeállítások */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Megakadályozza a felesleges görgetést */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f9f4;
-    color: #333;
+}
+
+/* Teljes képernyős háttérkép a rajzotokhoz */
+.tree-container {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/images/faiskola.png');
+    background-size: 100% 100%; /* Kitölti a teljes képernyőt */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px 0;
+    padding: 20px;
 }
 
-/* 1. LOMB KORONA (Fejléc) */
+/* 1. LOMB KORONA (Fejléc az almáknál) */
 .tree-crown {
-    width: 100%;
-    max-width: 900px;
-    background-color: #2e8b57; /* Zöld szín */
-    color: white;
     text-align: center;
-    padding: 3rem 1rem 2.5rem 1rem;
-    /* Íves, lombkoronára emlékeztető alsó sarkok */
-    border-bottom-left-radius: 60px;
-    border-bottom-right-radius: 60px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    z-index: 10;
 }
 
-.crown-content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+.site-title {
+    color: #ffffff;
+    font-size: 1.8rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    margin-bottom: 5px;
 }
 
-.slogan {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    font-style: italic;
-    opacity: 0.9;
-}
-
-/* Az almák (menügombok) elrendezése a lombban */
+/* Az almák alatti gombok pozicionálása */
 .apple-nav {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
+    gap: 18vw; /* Ezzel tudjátok pontosan az almák alá húzni a gombokat képernyőmérettől függően */
 }
 
 .apple-btn {
-    background-color: #cc3333; /* Piros alma szín */
+    background-color: #b91c1c; /* Piros alma szín */
     color: white;
     text-decoration: none;
-    padding: 0.75rem 1.8rem;
-    border-radius: 50px; /* Kerekded, almásforma gombok */
+    padding: 5px 14px;
+    border-radius: 20px;
     font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s, background-color 0.2s;
+    font-size: 0.85rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+    transition: transform 0.2s;
 }
 
 .apple-btn:hover {
-    background-color: #a82424;
-    transform: scale(1.08); /* Kicsit megnő, ha ráviszik az egeret */
+    transform: scale(1.1);
+    background-color: #991b1b;
 }
 
-/* 2. FA TÖRZSE (Fő tartalom) */
-.tree-trunk {
-    width: 100%;
-    max-width: 550px; /* Keskenyebb, mint a korona, hogy törzs-hatást keltsen */
-    background-color: #5c3a21; /* Barna fatörzs szín */
-    color: white;
-    padding: 3rem 2rem;
+/* 2. DOBOZOK A TÖRZS MELLETT (Ágak helyén) */
+.tree-content-sides {
+    position: absolute;
+    top: 35%;
+    width: 80%;
+    max-width: 1100px;
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.4); /* Kéreg-árnyalat hatás */
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none; /* Hogy ne akadályozza a kattintást, ha kell */
 }
 
-.trunk-box {
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 1.5rem;
+/* Engedélyezzük a kattintást magukon a dobozokon */
+.side-box {
+    pointer-events: auto;
+    background-color: rgba(92, 58, 33, 0.9); /* Féláttetsző barna */
+    color: #fffaf0;
+    padding: 12px 18px;
     border-radius: 8px;
-    border-left: 5px solid #2e8b57; /* Zöld díszcsík a dobozokon */
+    border-left: 4px solid #2e8b57;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    width: 260px;
 }
 
-.trunk-box h2, .trunk-box h3 {
-    color: #f4e2bb; /* Világosabb barna/krém kiemelés */
-    margin-bottom: 0.5rem;
+.left-box {
+    margin-left: 5%;
 }
 
-/* 3. GYÖKÉRZET (Lábléc) */
+.right-box {
+    margin-right: 5%;
+}
+
+.bottom-wide-box {
+    position: absolute;
+    bottom: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+}
+
+.side-box h2 {
+    font-size: 0.95rem;
+    color: #fef08a;
+    margin-bottom: 4px;
+}
+
+.side-box p {
+    font-size: 0.8rem;
+}
+
+/* 3. LÁBLÉC ALUL */
 .tree-roots {
-    width: 100%;
-    max-width: 550px;
-    background-color: #3b2314; /* Sötétebb barna gyökér szín */
-    color: #d1d1d1;
+    background-color: rgba(59, 35, 20, 0.85);
+    color: #e2e8f0;
     text-align: center;
-    padding: 1.5rem;
-    font-size: 0.9rem;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-}
-
-.tree-roots p {
-    margin: 0.3rem 0;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    z-index: 10;
 }
